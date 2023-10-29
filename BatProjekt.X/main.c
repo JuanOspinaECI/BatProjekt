@@ -45,7 +45,7 @@ void Setup (void) {
     
     //USART
     RCSTA = 10000000;
-    
+    TXSTA = 00100010; // configurar como asincrono uart
     
     //I2C
     //bit 3-0 1000 for master mode
