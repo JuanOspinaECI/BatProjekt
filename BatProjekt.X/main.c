@@ -119,14 +119,61 @@ void Setup (void) {
     
     
 }
+unsigned int MedVoltageBat_1()
+{
+    // Funcion para leer el valor ADC de BAT 1
+    // Convertir a dato int 
+    return 1;
+}
+
+unsigned int MedVoltageBat_2()
+{
+    // Funcion para leer el valor ADC de BAT 1
+    // Convertir a dato int 
+    return 1;
+}
+
+int Abs(int ValueA)
+{
+    if (ValueA >= 0) return ValueA;
+    else return -ValueA;
+}
 
 void main(void) {
+    char V_usb;
+    //unsigned int V_Bat1;
+    //unsigned int V_Bat2;
     Setup();
     PORTAbits.RA2 = 1; 
     PORTCbits.RC0 = 1;
     
-    
+    V_usb = 0; // Definir como medir si USB conectado (fuente)
+    if(V_usb) //medicion de cargador  no conectado 
+    {
+        PORTBbits.RB0 = 0; //Rele 1 BAT1 con BAT1_MCP
+        PORTBbits.RB1 = 0; //Rele 2 BAT2 con BAT2_MCP
+        if(MedVoltageBat_1() >= 4.0 && MedVoltageBat_1() >= 4.0 )
+        {
+            while(Abs(MedVoltageBat_1()  -  MedVoltageBat_1())>0.01)
+            {
+                if(V_usb == 0)break;
+                //Cargar bateria que este con menor nivel de carga
+            }
+            PORTBbits.RB0 = 0; //Rele 1 BAT1 con BAT1_MCP
+            PORTBbits.RB1 = 1; //Rele 2 BAT2 con Rele 3
+            PORTBbits.RB1 = 0; //Rele 3 Rele 2 con BAT1
+        }
+    }
+    else
+    {
+        // Configuracion en paralelo de ambas baterias
+        // Ambas quedan conectadas con el MCP 1
+        PORTBbits.RB0 = 0; //Rele 1 BAT1 con BAT1_MCP
+        PORTBbits.RB1 = 1; //Rele 2 BAT2 con Rele 3
+        PORTBbits.RB1 = 0; //Rele 3 Rele 2 con BAT1
+    }
     
     return;
 }
+
 
