@@ -28,11 +28,11 @@ while contador<=muestras
     xlim([0 contador/2 + 2]); %Limites del eje x
     data{contador} = fscanf(puerto,'%d %d');
     if(data{contador}(1) == 1)
-        data1(cont1) = data{contador}(2);
+        data1(cont1) = data{contador}(2); %Dividir segun ADC y calibracion
         cont1 = cont1 + 1;
     end
     if(data{contador}(1) == 2)
-        data2(cont2) = data{contador}(2);
+        data2(cont2) = data{contador}(2); %Dividir segun ADC y calibracion
         cont2 = cont2 + 1;
     end
     contador = contador + 1;
@@ -41,6 +41,5 @@ while contador<=muestras
 end
 fclose(puerto);
 delete(puerto);
-    plot(data1)
-    hold on
-    plot(data2)
+%Crear vector de tiempo segun periodo de muestreo
+%
