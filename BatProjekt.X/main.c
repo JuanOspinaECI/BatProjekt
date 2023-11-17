@@ -29,7 +29,7 @@ void Setup (void) {
     //Configuracion Puerto A
     // Todos como entradas 
     // RA2 entrada = 1 (Led prueba)
-    TRISA = 0b11111011;
+    TRISA = 0b11110011;
     
     ADCON0 = Analog_ch1_ConvOff;
     
@@ -76,16 +76,36 @@ unsigned int MedVoltageBat_1()
     __delay_ms(1);
     ADCON0bits.GO = 1;
     while(ADCON0bits.DONE == 1);
+    __delay_ms(1);
     AdcBat1 = (ADRESH << 8) + ADRESL;
     ADCON0bits.ADON = 1; // OFF
-    return 1;
+    return AdcBat1;
 }
 
 unsigned int MedVoltageBat_2()
 {
-    // Funcion para leer el valor ADC de BAT 1
+    // Funcion para leer el valor ADC de BAT 2
     // Convertir a dato int 
-    return 1;
+    ADCON2bits.ACQT = 0b111; // Acquisition Time 20TAD
+    ADCON2bits.ADCS = 0b100; // A/D Conversion Clock FOSC/4
+    ADCON0bits.ADON = 1; // ON
+    ADCON0bits.CHS = 0b0001; // CH0
+    __delay_ms(1);
+    ADCON0bits.GO = 1;
+    while(ADCON0bits.DONE == 1);
+    __delay_ms(1);
+    AdcBat2 = (ADRESH << 8) + ADRESL;
+    ADCON0bits.ADON = 1; // OFF
+    return AdcBat1;
+}
+bool MedUsb()
+{
+    //ADCON1bits.PCFG = 0b1011; // Habilitar AN3 como entrada analog 
+    //ADCON0bits.CHS = 0b1111; // Deshabiliutar AN3 como Analog
+    TRISAbits.RA3 = 0; // just in case
+    if (PORTAbits.RA3 == 1) return true;
+    return false;
+    
 }
 
 int Abs(int ValueA)
@@ -124,7 +144,11 @@ void __interrupt() high_isr(void){
     if(TMR0IF == 1)
     { 
         TMR0IF = 0;
-        printf("Voltage Bat 1: %u ", AdcBat1);
+        printf("\n\n Voltage Bat 1: %u ", AdcBat1);
+        printf("/n");
+        uart_send(0x0A);
+        printf("\n\n Voltage Bat 2: %u  ", AdcBat2);
+        uart_send(0x0A);
         PORTCbits.RC0 = ~PORTCbits.RC0;
         
     }
@@ -160,27 +184,43 @@ void main(void) {
     printf("Hola");
     while(1){
         MedVoltageBat_1();
+        MedVoltageBat_2();
         __delay_ms(10);
     }
 
     
     //test_uart();
-    /*
-    if(V_usb) //medicion de cargador  no conectado 
+   /*
+    if(MedUsb()) //medicion de cargador  no conectado 
     {
-        PORTBbits.RB0 = 0; //Rele 1 BAT1 con BAT1_MCP
-        PORTBbits.RB1 = 0; //Rele 2 BAT2 con BAT2_MCP
-        if(MedVoltageBat_1() >= 4.0 && MedVoltageBat_1() >= 4.0 )
+        if(Abs(MedVoltageBat_1()  -  MedVoltageBat_1())>0.01)
         {
-            while(Abs(MedVoltageBat_1()  -  MedVoltageBat_1())>0.01)
-            {
-                if(V_usb == 0)break;
-                //Cargar bateria que este con menor nivel de carga
-            }
             PORTBbits.RB0 = 0; //Rele 1 BAT1 con BAT1_MCP
-            PORTBbits.RB1 = 1; //Rele 2 BAT2 con Rele 3
-            PORTBbits.RB1 = 0; //Rele 3 Rele 2 con BAT1
+            PORTBbits.RB1 = 0; //Rele 2 BAT2 con BAT2_MCP
+            __delay_ms(10);
+            if(MedVoltageBat_1() <= 4.0 && MedVoltageBat_1() <= 4.0 )
+            {
+                //CE enable
+                while(Abs(MedVoltageBat_1()  -  MedVoltageBat_1())>0.01)
+                {
+                    if(MedUsb()== false)break;
+                    __delay_ms(10);
+                }
+                PORTBbits.RB0 = 0; //Rele 1 BAT1 con BAT1_MCP
+                PORTBbits.RB1 = 1; //Rele 2 BAT2 con Rele 3
+                PORTBbits.RB1 = 0; //Rele 3 Rele 2 con BAT1
+                __delay_ms(10);
+            }
         }
+        else 
+        {
+            // Enviar mensaje de baterias cargadas
+            // CE disable
+          PORTBbits.RB0 = 0; //Rele 1 BAT1 con BAT1_MCP
+          PORTBbits.RB1 = 1; //Rele 2 BAT2 con Rele 3
+          PORTBbits.RB1 = 0; //Rele 3 Rele 2 con BAT1  
+        }
+
     }
     else
     {
