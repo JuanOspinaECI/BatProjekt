@@ -18,7 +18,9 @@
 #include <stdio.h>
 #include "UART.h"
 
-
+char NumStr(unsigned int Value);
+void ConvInt(unsigned int Value);
+char  Str[4];
 
 
 
@@ -144,17 +146,73 @@ void __interrupt() high_isr(void){
     if(TMR0IF == 1)
     { 
         TMR0IF = 0;
-        printf("1 %u ", AdcBat1);
-        printf("/n");
+        UART_printf("1 ");
+        ConvInt(AdcBat1);
+        uart_send(&Str[0]);
+        uart_send(&Str[1]);
+        uart_send(&Str[2]);
+        uart_send(&Str[3]);
+        UART_printf(". \n");
         //uart_send(0x0A);
-        printf("2 %u  ", AdcBat2);
-        printf("/n");
+        UART_printf("2 ");
+        ConvInt(AdcBat2);
+        uart_send(&Str[0]);
+        uart_send(&Str[1]);
+        uart_send(&Str[2]);
+        uart_send(&Str[3]);
+        UART_printf(". \n");
         //uart_send(0x0A);
-        PORTCbits.RC0 = ~PORTCbits.RC0;
-        
+        PORTCbits.RC0 = ~PORTCbits.RC0; 
     }
     
     INTCONbits.GIEH = 1;
+}
+
+void ConvInt(unsigned int Value)
+{
+    unsigned int     Mil     = 0;
+    unsigned int     Cien    = 0;
+    unsigned int     Diez    = 0;
+    unsigned int     Uno     = 0;
+    Mil     = Value/1000;
+    Value   = Value - (1000*Mil);
+    Cien    = Value/100;
+    Value   = Value - (Cien*100);
+    Diez    = Value/10;
+    Uno     = Value - (Diez*10);
+    Str[0] = NumStr(Mil);
+    Str[1] = NumStr(Cien);
+    Str[2] = NumStr(Diez);
+    Str[3] = NumStr(Uno);
+}
+
+char NumStr(unsigned int Value)
+{
+  switch(Value)
+  {
+      case 0:
+          return '0';
+      case 1:
+          return '1';
+      case 2: 
+          return '2';
+      case 3:
+          return '3';
+      case 4:
+          return '4';
+      case 5:
+          return '5';
+      case 6:
+          return '6';
+      case 7:
+          return '7';
+      case 8:
+          return '8';
+      case 9:
+          return '9';
+      default:
+          return '0';
+  }
 }
 
 void __interrupt(low_priority) low_isr(void){
@@ -182,7 +240,7 @@ void main(void) {
     Timer0IntInit();
     V_usb = 0; // Definir como medir si USB conectado (fuente)    
     uart_init();
-    printf("Hola");
+    //printf("Hola");
     while(1){
         MedVoltageBat_1();
         MedVoltageBat_2();
@@ -191,15 +249,15 @@ void main(void) {
 
     
     //test_uart();
-   /*
+   
     if(MedUsb()) //medicion de cargador  no conectado 
     {
-        if(Abs(MedVoltageBat_1()  -  MedVoltageBat_1())>0.01)
-        {
+        if(Abs(MedVoltageBat_1()  -  MedVoltageBat_1())> 2)
+        { // dif mayor  a 0.01 v      
             PORTBbits.RB0 = 0; //Rele 1 BAT1 con BAT1_MCP
             PORTBbits.RB1 = 0; //Rele 2 BAT2 con BAT2_MCP
             __delay_ms(10);
-            if(MedVoltageBat_1() <= 4.0 && MedVoltageBat_1() <= 4.0 )
+            if(MedVoltageBat_1() <= 819 && MedVoltageBat_1() <= 819 ) //819 = 4.0 v
             {
                 //CE enable
                 while(Abs(MedVoltageBat_1()  -  MedVoltageBat_1())>0.01)
@@ -231,7 +289,7 @@ void main(void) {
         PORTBbits.RB1 = 1; //Rele 2 BAT2 con Rele 3
         PORTBbits.RB1 = 0; //Rele 3 Rele 2 con BAT1
     }
-    */
+    
     return;
 }
 

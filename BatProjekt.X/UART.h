@@ -85,7 +85,7 @@ void UART_write(char dato);
 
 void UART_printf(char *cadena);
 
-void uart_send(uint8_t *c);
+void uart_send(uint16_t *c);
 void putch(char dato);
 void uart_receiver(uint8_t *c, bool *rx_flag);
 

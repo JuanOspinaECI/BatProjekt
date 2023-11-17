@@ -44,7 +44,7 @@ void UART_printf(char *cadena)
     }
 }
 
-void uart_send(uint8_t *c){
+void uart_send(uint16_t *c){
     TXREG=*c;
     while(TXSTAbits.TRMT==0){
         Nop();
@@ -86,7 +86,7 @@ void test_uart(void) {
     __delay_ms(1000);
      
     //uart_send(data);
-    printf("El entero %u se convierte a '%s' como cadena", a, bufer);
+    //printf("El entero %u se convierte a '%s' como cadena", a, bufer);
     UART_printf(bufer);
     /* 
        if(got_data_bool)

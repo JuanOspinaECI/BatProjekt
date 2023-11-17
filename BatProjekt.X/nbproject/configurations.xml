@@ -153,6 +153,10 @@
         <property key="program-the-device-with-default-config-words" value="false"/>
         <property key="remove-unused-sections" value="true"/>
       </HI-TECH-LINK>
+      <item path="I2C.c" ex="true" overriding="false">
+      </item>
+      <item path="I2C.h" ex="true" overriding="false">
+      </item>
       <item path="OLED.c" ex="true" overriding="false">
         <HI-TECH-COMP>
         </HI-TECH-COMP>
