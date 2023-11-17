@@ -144,11 +144,12 @@ void __interrupt() high_isr(void){
     if(TMR0IF == 1)
     { 
         TMR0IF = 0;
-        printf("\n\n Voltage Bat 1: %u ", AdcBat1);
+        printf("1 %u ", AdcBat1);
         printf("/n");
-        uart_send(0x0A);
-        printf("\n\n Voltage Bat 2: %u  ", AdcBat2);
-        uart_send(0x0A);
+        //uart_send(0x0A);
+        printf("2 %u  ", AdcBat2);
+        printf("/n");
+        //uart_send(0x0A);
         PORTCbits.RC0 = ~PORTCbits.RC0;
         
     }
