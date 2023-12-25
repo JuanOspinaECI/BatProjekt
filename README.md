@@ -30,7 +30,7 @@ A simplified flow diagram of the code:
 
 This shows the unbalanced charge with our solution:
 
-![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/charge2_7_parallel.png)
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/Charge_curve_bat3_5_zoom.png)
 
 Here is the behavior with a load connected:
 
