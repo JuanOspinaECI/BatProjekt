@@ -1,3 +1,8 @@
+Final result:
+
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/PCB4.jpg)
+
+
 This project is dedicated to present a functional Ion-lithium battery cell balancing prototype that enhances the self-balancing batteries behavior introducing an innovative and efficient approach. 
 Since parallel cell configurations are commonly used in commercial battery packs, the research primary goal is to develop an introductory model that can be easily adapted for more complex battery setups in future applications. 
 Additionally, it will be used as a test circuit for analyzing battery charge and discharge behaviors.
@@ -51,6 +56,35 @@ The data was acquired from the USART and read from a module to the USB port of t
 
 The following photos show the esquematic desing:
 
+Battery managments:
+
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/Bat_man.png)
+
+DC-DC:
+
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/DC_DC.png)
+
+Microcontroller:
+
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/Micro_led.png)
+
+Relays:
+
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/Relays%20diode.png)
+
+Protection diodes:
+
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/diode.png)
+
+Typec-USB:
+
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/USB.png)
+
+PCB design:
+
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/PCB1.png)
+
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/PCB2.png)
 
 
 
