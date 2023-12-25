@@ -107,8 +107,16 @@ uint16_t AdcBat2;
 
 #define RightJus_Acq12TAD_ConvFOS16 0b10101101
 
+#define CE2 LATBbits.LATB4
+#define CE1 LATBbits.LATB3
+#define S3 LATBbits.LATB2
+#define S2 LATBbits.LATB1
+#define S1 LATBbits.LATB0
+
 void __interrupt() high_isr(void);
 void __interrupt(low_priority) low_isr(void);
+
+
 
 #ifdef	__cplusplus
 }
