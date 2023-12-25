@@ -11,7 +11,7 @@ Batteries #1 and #7 voltage when balancing in parallel:
 
 Batteries 1 and 7 voltage difference and current when balancing in parallel.
 
-![alt text]([https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/Voltage_bal.png](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/Dif_V_n_Current.png))
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/Dif_V_n_Current.png)
 
 
 This shows that there is some waste of energy while natural balancing, and the dominat battery needs to perform an additional cycle to discharge and then charge, if needed.
