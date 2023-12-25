@@ -9,3 +9,34 @@ Batteries #1 and #7 voltage when balancing in parallel:
 
 ![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/Voltage_bal.png)
 
+Batteries 1 and 7 voltage difference and current when balancing in parallel.
+
+
+
+This shows that there is some waste of energy while natural balancing, and the dominat battery needs to perform an additional cycle to discharge and then charge, if needed.
+
+This is the graph that illustrates the natural behavior:
+
+[Provide a description or attach the graph]
+
+
+A simple graph explaning the solution:
+
+[Diagrama de bloques]
+
+A simplified flow diagram of the code:
+
+[Diagrama de flujo]
+
+This shows the unbalanced charge with our solution:
+
+[Provide a description or attach the graph]
+
+Here is the behavior with a load connected:
+
+[Provide a description or attach the graph]
+
+When the batteries are balanced, the circuit is capable of charging both batteries with just one charger and maintaining the balance:
+
+[Provide a description or attach the graph]"
+
