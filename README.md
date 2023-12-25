@@ -11,32 +11,47 @@ Batteries #1 and #7 voltage when balancing in parallel:
 
 Batteries 1 and 7 voltage difference and current when balancing in parallel.
 
+![alt text]([https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/Voltage_bal.png](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/Dif_V_n_Current.png))
 
 
 This shows that there is some waste of energy while natural balancing, and the dominat battery needs to perform an additional cycle to discharge and then charge, if needed.
 
 This is the graph that illustrates the natural behavior:
 
-[Provide a description or attach the graph]
-
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/batt_3_8_8Dominant..png)
 
 A simple graph explaning the solution:
 
-[Diagrama de bloques]
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/BLOCKD%20(1).jpg)
 
 A simplified flow diagram of the code:
 
-[Diagrama de flujo]
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/Flow_chart_simplified.png)
 
 This shows the unbalanced charge with our solution:
 
-[Provide a description or attach the graph]
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/charge2_7_parallel.png)
 
 Here is the behavior with a load connected:
 
-[Provide a description or attach the graph]
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/discharge2_7.png)
 
 When the batteries are balanced, the circuit is capable of charging both batteries with just one charger and maintaining the balance:
 
-[Provide a description or attach the graph]"
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/charge2_7_parallel.png)
+
+
+
+---------------------------------------------------------------------------------------------------
+
+
+The data was acquired from the USART and read from a module to the USB port of the PC. The Matlab code is designed to take the data and store it in vectors. Subsequently, the data underwent additional treatment and processing to generate the graphs.
+
+----------------------------------------------------------------------------------------------------
+
+The following photos show the esquematic desing:
+
+
+
+
 
