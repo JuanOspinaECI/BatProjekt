@@ -3,5 +3,9 @@ Since parallel cell configurations are commonly used in commercial battery packs
 Additionally, it will be used as a test circuit for analyzing battery charge and discharge behaviors.
 
 
-Some initial test of the natural balancing conditions of the parallel batteries balancing:
+Some initial test of the natural balancing conditions of the parallel batteries balancing (we had 10 different batteries for tests):
+
+Batteries #1 and #7 voltage when balancing in parallel:
+
+![alt text](https://github.com/JuanOspinaECI/BatProjekt/blob/main/IMG/Voltage_bal.png)
 
